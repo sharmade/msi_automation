@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Product Id="*" Name="$(var.ProductName)" Language="1033" Version="$(var.Version)" Manufacturer="{Manufacturer_name}" UpgradeCode="{upgrade_code}">
+	<Package Compressed="yes" InstallerVersion="200" InstallScope="perMachine" Manufacturer="I{}" Description="$(var.Description)" Keywords="Installer;MSI;Database" />
+	
+	<Upgrade Id="{id}">
+		<UpgradeVersion  Language="1033" Minimum="0.0" MigrateFeatures="yes" IncludeMinimum="yes" IncludeMaximum="yes" Property="WIX_UPGRADE_DETECTED"/>
+	</Upgrade>
+		 <!--<MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="sss" MigrateFeatures="yes" />	 -->
+    <MediaTemplate  EmbedCab="yes" />
+	<Property Id="ARPNOMODIFY">1</Property>
+	<Property Id="LIMITUI">1</Property>
+	<Property Id="ROOTDRIVE">C:\</Property>
+	<Property Id="REBOOT">ReallySuppress</Property>
+
+
+
+	
+	
+	<!-- Define the target directory where the software will be installed -->
+	<Directory Id="TARGETDIR" Name="SourceDir">
+		<Directory Id="ProgramFilesFolder">
+            <Directory Id="INSTALLDIR" Name="ProgName" />
+        </Directory>
+		<Directory Id="StartMenuFolder">
+			<Directory Id="ProgramMenuFolder">	
+				<Directory Id= "Applications" Name = "Applications"/>	
+			</Directory>
+		</Directory>
+		<!--<Directory Id="ProgramMenuFolder">
+			<Directory Id="ApplicationProgramsFolder" Name="Applications"/>
+		</Directory> -->
+	 </Directory>
+	 
+	<!-- Create a Shortcut for the application -->
+	<!--
+	<DirectoryRef Id="ApplicationProgramsFolder">
+		<Component Id="ApplicationShortcut" Guid="081316b0-3695-442b-9885-b69f9697dcf3">
+			<Shortcut Id="ApplicationStartMenuShortcut" 
+                  Name="ProgramName"                  
+                  Target="[#ProgramName.exe]"
+                  WorkingDirectory="INSTALLDIR" Advertise="yes"/>
+			<RemoveFile  Id="ApplicationStartMenuShortcut" Name="ProgramName" On="uninstall"/>        
+		</Component>
+	</DirectoryRef>	-->
+	
+	<!-- Define features and add components to a feature -->
+    <!--<Feature Id="Complete" Title="Complete" Level="3"  Absent="disallow" Display="32513" ConfigurableDirectory="INSTALLDIR"> -->
+	  <Feature Id="Complete" Title="Complete" Absent="disallow" ConfigurableDirectory="INSTALLDIR">
+		<ComponentGroupRef Id="NTFilesGroup" />
+		<!--<ComponentRef  Id="ApplicationShortcut"/> -->
+		<ComponentRef  Id="registry"/>		
+		<!-- <ComponentGroupRef  Id="NTRegistryGroup"/>	 -->	 
+    </Feature>    
+</Product>
+</Wix>
