@@ -35,7 +35,7 @@
 	<!-- Create a Shortcut for the application -->
 	<!--
 	<DirectoryRef Id="ApplicationProgramsFolder">
-		<Component Id="ApplicationShortcut" Guid="081316b0-3695-442b-9885-b69f9697dcf3">
+		<Component Id="ApplicationShortcut" Guid="id">
 			<Shortcut Id="ApplicationStartMenuShortcut" 
                   Name="ProgramName"                  
                   Target="[#ProgramName.exe]"
